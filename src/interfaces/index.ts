@@ -12,3 +12,8 @@ export interface IPost {
   category: ICategory;
   createdAt: string;
 }
+
+export interface IMenus {
+  title: string;
+  path: string;
+}
