@@ -34,6 +34,7 @@
     "jotai-tanstack-query": "^0.8.5",
     "next": "14.2.3",
     "prettier-plugin-tailwindcss": "^0.5.14",
+    "quill": "^2.0.3",
     "react": "^18",
     "react-dom": "^18",
     "wonka": "^6.3.4"
