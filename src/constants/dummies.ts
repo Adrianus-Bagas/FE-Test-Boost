@@ -101,4 +101,24 @@ export const defaultPosts: IPost[] = [
     category: {id: 4, name: "Inspiration"},
     createdAt: "2023-11-10T09:00:00Z",
   },
+  {
+    id: 11,
+    title: "Family Traditions and Their Importance",
+    summary: "How family traditions strengthen bonds and create lasting memories.",
+    author: "Daniel Clark",
+    content:
+      "Family traditions play a crucial role in fostering a sense of belonging and continuity. Whether it's holiday celebrations, weekly dinners, or annual trips, these rituals create opportunities for connection and shared experiences. They help build strong family bonds, pass down values, and create lasting memories that can be cherished for generations. Embracing and creating family traditions can enrich our lives and strengthen relationships.",
+    category: {id: 3, name: "Family"},
+    createdAt: "2023-11-15T14:00:00Z",
+  },
+  {
+    id: 12,
+    title: "Overcoming Fear of Change",
+    summary: "Strategies to embrace change and turn it into an opportunity.",
+    author: "Grace Lewis",
+    content:
+      "Fear of change can often hold us back from reaching our full potential. However, by shifting our perspective and viewing change as an opportunity for growth, we can overcome this fear. Techniques such as mindfulness, setting small achievable goals, and seeking support from others can help ease the transition. Embracing change with an open mind can lead to new experiences, personal development, and unexpected successes.",
+    category: {id: 4, name: "Inspiration"},
+    createdAt: "2023-11-20T11:30:00Z",
+  },
 ];
