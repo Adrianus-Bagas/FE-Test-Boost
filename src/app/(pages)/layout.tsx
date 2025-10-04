@@ -8,7 +8,7 @@ export default function UnauthenticatedLayout({children}: {children: React.JSX.E
     <>
       <>
         <Suspense fallback={<></>}>
-          <div className="min-h-screen pb-20">
+          <div className="min-h-screen py-20 px-4">
             <>{children}</>
           </div>
           <Bottombar />
