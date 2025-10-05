@@ -13,7 +13,13 @@ export default function Create() {
     const existForm = localStorage.getItem("createForm");
 
     if (!existForm) {
-      localStorage.setItem("createForm", JSON.stringify(createForm));
+      localStorage.setItem(
+        "createForm",
+        JSON.stringify({
+          ...createForm,
+          step: "1 - Blog Metadata",
+        }),
+      );
     } else {
       setCreateForm(JSON.parse(existForm));
     }
