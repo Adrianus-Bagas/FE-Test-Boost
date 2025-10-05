@@ -19,7 +19,7 @@ export const PostCard = ({post}: {post: IPost}) => {
 
   return (
     <div
-      className="bg-black text-white p-3 cursor-pointer flex flex-col justify-between"
+      className="w-full bg-black text-white p-3 cursor-pointer flex flex-col justify-between"
       onClick={handleClick}
     >
       <div>

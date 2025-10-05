@@ -16,6 +16,8 @@ export default function Home() {
     }, 3000);
   }, []);
 
+  posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
   return (
     <>
       <div className="py-4">
