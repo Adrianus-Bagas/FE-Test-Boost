@@ -3,10 +3,10 @@
 import {useRouter} from "next/navigation";
 import {useSetAtom} from "jotai";
 
-import {AuthorIcon} from "@/assets/icons";
 import {IPost} from "@/interfaces";
 import {timeConverter} from "@/utils/timeConverter";
 import {selectedPostAtom} from "@/store";
+import {Author} from "@/components";
 
 export const PostCard = ({post}: {post: IPost}) => {
   const router = useRouter();
@@ -25,10 +25,12 @@ export const PostCard = ({post}: {post: IPost}) => {
       <div>
         <div className="flex justify-between items-center">
           <p className="text-xs">{post.category.name}</p>
-          <div className="flex justify-center items-center gap-1">
-            <AuthorIcon className="w-2 h-2" />
-            <p className="text-xs">{post.author}</p>
-          </div>
+          <Author
+            containerClassName="flex justify-center items-center gap-1"
+            iconClassName="w-2 h-2"
+            text={post.author}
+            textClassName="text-xs"
+          />
         </div>
         <div className="text-center">
           <p className="py-2">{post.title}</p>
