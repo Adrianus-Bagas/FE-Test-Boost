@@ -4,6 +4,7 @@ import {useRouter} from "next/navigation";
 
 import {AuthorIcon} from "@/assets/icons";
 import {IPost} from "@/interfaces";
+import {timeConverter} from "@/utils/timeConverter";
 
 export const PostCard = ({post}: {post: IPost}) => {
   const router = useRouter();
@@ -14,7 +15,7 @@ export const PostCard = ({post}: {post: IPost}) => {
 
   return (
     <div className="bg-black text-white p-3 cursor-pointer" onClick={handleClick}>
-      <p className="text-right text-xs">{post.createdAt}</p>
+      <p className="text-right text-xs">{timeConverter(post.createdAt)}</p>
       <div className="text-center">
         <p>{post.title}</p>
         <div className="flex justify-center items-center gap-2">
