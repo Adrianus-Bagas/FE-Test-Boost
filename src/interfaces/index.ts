@@ -1,5 +1,5 @@
 export interface ICategory {
-  id: number;
+  id: string;
   name: string;
 }
 
@@ -29,5 +29,5 @@ export interface ICreateForm {
   author: string;
   summary: string;
   content: string;
-  category: ICategory | null;
+  categoryId: string;
 }

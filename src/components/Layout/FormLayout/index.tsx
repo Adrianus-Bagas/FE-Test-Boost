@@ -1,6 +1,6 @@
 import {useAtom} from "jotai";
 
-import {Button, Input} from "@/components";
+import {Button, Dropdown, Input} from "@/components";
 import {ICreateForm} from "@/interfaces";
 import {createPostFormAtom} from "@/store";
 
@@ -56,7 +56,7 @@ export const FormLayout = () => {
       return !createForm.author || !createForm.title;
     }
     if (createForm.step.includes("2")) {
-      return !createForm.category && !createForm.summary;
+      return !createForm.categoryId || !createForm.summary;
     }
     if (createForm.step.includes("3")) {
       return !createForm.content;
@@ -74,13 +74,32 @@ export const FormLayout = () => {
               handleChange={handleChangeInput}
               inputKey="title"
               label="Title"
+              type="input"
               value={createForm.title}
             />
             <Input
               handleChange={handleChangeInput}
               inputKey="author"
               label="Author"
+              type="input"
               value={createForm.author}
+            />
+          </div>
+        )}
+        {createForm.step.includes("2") && (
+          <div className="w-full md:w-1/2">
+            <Input
+              handleChange={handleChangeInput}
+              inputKey="summary"
+              label="Summary"
+              type="textarea"
+              value={createForm.summary}
+            />
+            <Dropdown
+              handleChange={handleChangeInput}
+              inputKey="categoryId"
+              label="Category"
+              value={createForm.categoryId}
             />
           </div>
         )}
