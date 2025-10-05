@@ -6,13 +6,15 @@ export const Input = ({
   value,
   handleChange,
   type,
+  readOnly = false,
 }: {
   label: string;
   inputKey: keyof ICreateForm;
   value: string;
   // eslint-disable-next-line no-unused-vars
-  handleChange: (key: keyof ICreateForm, value: string) => void;
+  handleChange?: (key: keyof ICreateForm, value: string) => void;
   type: "input" | "textarea";
+  readOnly?: boolean;
 }) => {
   return (
     <>
@@ -21,16 +23,22 @@ export const Input = ({
         {type === "input" ? (
           <input
             className="border-2 border-black p-1"
+            readOnly={readOnly}
             type="text"
             value={value}
-            onChange={(event) => handleChange(inputKey, event.target.value)}
+            onChange={
+              handleChange ? (event) => handleChange(inputKey, event.target.value) : undefined
+            }
           />
         ) : (
           <textarea
             className="border-2 border-black p-1"
+            readOnly={readOnly}
             rows={5}
             value={value}
-            onChange={(event) => handleChange(inputKey, event.target.value)}
+            onChange={
+              handleChange ? (event) => handleChange(inputKey, event.target.value) : undefined
+            }
           />
         )}
       </div>

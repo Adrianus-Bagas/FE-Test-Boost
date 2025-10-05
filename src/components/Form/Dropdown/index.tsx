@@ -6,12 +6,14 @@ export const Dropdown = ({
   inputKey,
   value,
   handleChange,
+  disabled = false,
 }: {
   label: string;
   inputKey: keyof ICreateForm;
   value: string;
   // eslint-disable-next-line no-unused-vars
-  handleChange: (key: keyof ICreateForm, value: string) => void;
+  handleChange?: (key: keyof ICreateForm, value: string) => void;
+  disabled?: boolean;
 }) => {
   return (
     <>
@@ -19,8 +21,11 @@ export const Dropdown = ({
         <p>{label}</p>
         <select
           className="border-2 border-black p-1"
+          disabled={disabled}
           value={value}
-          onChange={(event) => handleChange(inputKey, event.target.value)}
+          onChange={
+            handleChange ? (event) => handleChange(inputKey, event.target.value) : undefined
+          }
         >
           <option selected value="">
             ------

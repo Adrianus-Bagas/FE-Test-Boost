@@ -46,7 +46,10 @@ export default function Detail({params: {id}}: {params: {id: string}}) {
             <p>{selectedPost.summary}</p>
           </div>
           <div>
-            <p className="text-justify md:w-3/4">{selectedPost.content}</p>
+            <div
+              dangerouslySetInnerHTML={{__html: selectedPost.content}}
+              className="text-justify md:w-3/4"
+            />
           </div>
         </div>
       )}

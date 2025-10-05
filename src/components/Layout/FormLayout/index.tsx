@@ -1,11 +1,20 @@
-import {useAtom} from "jotai";
+"use client";
 
-import {Button, Dropdown, Input} from "@/components";
+import {useAtom, useSetAtom} from "jotai";
+import {useRouter} from "next/navigation";
+
+import {Button, Dropdown, Input, ReviewForm, TextArea} from "@/components";
 import {ICreateForm} from "@/interfaces";
-import {createPostFormAtom} from "@/store";
+import {alertMessageAtom, createPostFormAtom, postsAtom} from "@/store";
+import {categories} from "@/constants/categories";
+import {initialCreateForm} from "@/constants/initialForm";
 
 export const FormLayout = () => {
   const [createForm, setCreateForm] = useAtom(createPostFormAtom);
+  const [posts, setPosts] = useAtom(postsAtom);
+  const setAlertMessage = useSetAtom(alertMessageAtom);
+
+  const router = useRouter();
 
   const handleChangeForm = (newForm: ICreateForm) => {
     setCreateForm(newForm);
@@ -29,26 +38,53 @@ export const FormLayout = () => {
         ...createForm,
         step: "2 - Blog Summary & Category",
       };
+      handleChangeForm(newForm);
     }
     if (createForm.step.includes("2")) {
       newForm = {
         ...createForm,
         step: type === "next" ? "3 - Blog Content" : "1 - Blog Metadata",
       };
+      handleChangeForm(newForm);
     }
     if (createForm.step.includes("3")) {
       newForm = {
         ...createForm,
         step: type === "next" ? "4 - Review & Submit" : "2 - Blog Summary & Category",
       };
+      handleChangeForm(newForm);
     }
     if (createForm.step.includes("4")) {
-      newForm = {
-        ...createForm,
-        step: "3 - Blog Content",
-      };
+      if (type === "next") {
+        const existCategory = categories.find((category) => category.id === createForm.categoryId);
+
+        setPosts([
+          ...posts,
+          {
+            id: posts.length + 1,
+            title: createForm.title,
+            author: createForm.author,
+            summary: createForm.summary,
+            content: createForm.content,
+            category: {
+              id: createForm.categoryId,
+              name: existCategory ? existCategory.name : "Unknown",
+            },
+            createdAt: new Date().toISOString(),
+          },
+        ]);
+        setAlertMessage("Post created successfully!");
+        localStorage.removeItem("createForm");
+        setCreateForm(initialCreateForm);
+        router.push("/home");
+      } else {
+        newForm = {
+          ...createForm,
+          step: "3 - Blog Content",
+        };
+        handleChangeForm(newForm);
+      }
     }
-    handleChangeForm(newForm);
   };
 
   const disabledNextButton = () => {
@@ -103,6 +139,20 @@ export const FormLayout = () => {
             />
           </div>
         )}
+        {createForm.step.includes("3") && (
+          <div className="w-full md:w-1/2">
+            <TextArea
+              handleChange={handleChangeInput}
+              inputKey="content"
+              value={createForm.content}
+            />
+          </div>
+        )}
+        {createForm.step.includes("4") && (
+          <div className="w-full md:w-1/2">
+            <ReviewForm createForm={createForm} />
+          </div>
+        )}
         <div className="flex gap-3">
           <Button
             className="bg-black text-white p-2"
@@ -114,7 +164,7 @@ export const FormLayout = () => {
             className="bg-black text-white p-2"
             disabled={disabledNextButton()}
             handleClick={() => handleClickButton("next")}
-            label="Next"
+            label={createForm.step.includes("4") ? "Submit" : "Next"}
           />
         </div>
       </div>
